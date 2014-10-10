@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=0.5in, bottom=0.5in, left=0.7in, right=0.7in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\lstset{language=R,numbers=left, numberstyle=\tiny, tabsize=2, breaklines=true, frame=single}
+
+
+\renewcommand*\familydefault{\rmdefault}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+
+\title{MA471: Statistical Analysis of Financial Data\\Lab 7}
+\author{Kumar Harsha - 11012318}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{1-day VaR}
+A comparison of the parametric and non-parametric 1-day VaR of the given data for various confidence is presented below:
+  \subsection*{Citigroup data}
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      Confidence &Parametric &Non-parametric \\ \hline 
+      0.999 &-0.09634436 &-0.23445 \\
+      0.99 &-0.07262211 &-0.075332 \\
+      0.95 &-0.05145846 &-0.038551 \\
+      0.9 &-0.0401762 &-0.023622 \\ \hline
+    \end{tabular}
+  \end{center}
+  \subsection*{S\&P 500 data}
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      Confidence &Parametric &Non-parametric \\ \hline 
+      0.999 &-0.0419832 &-0.089295 \\
+      0.99 &-0.03162919 &-0.038341 \\
+      0.95 &-0.02239193 &-0.019984 \\
+      0.9 &-0.01746759 &-0.014216 \\ \hline
+    \end{tabular}
+  \end{center}
+
+\section{Bootstrap Estimate of VaR}
+Bootstrap estimate of VaR was calculated for 1000 resamples of 10000 size each.
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      Confidence &Citigroup &S\&P 500 \\ \hline
+      0.999 &-0.22766922 &-0.08779966 \\
+      0.99 &-0.07868860 &-0.03761162 \\
+      0.95 &-0.03849204 &-0.02003902 \\
+      0.9 &-0.02361172 &-0.01420956 \\ \hline
+    \end{tabular}
+  \end{center}
+
+\newpage
+\section{Log-returns}
+  \subsection*{Non-parametric density estimate using Gaussian kernel}
+  Bandwidth of a Gaussian kernel according to the Silverman Rule-of-Thumb is often simplified to
+    \begin{center}
+      $h = \hat{\sigma}n^{-\frac{1}{5}}$
+    \end{center}
+  The Gaussian kernel is formulated as
+    \begin{center}
+      $k_{4}(u) = \frac{1}{\sqrt{2\pi}}e^{-\frac{u^{2}}{2}}$
+    \end{center}
+    \begin{center}
+      \includegraphics[width=5.75in]{lab7ci_citi.png}
+      \includegraphics[width=5.75in]{lab7ci_sp500.png}
+    \end{center}
+  \newpage
+  \subsection*{Bootstrap distribution of mean of log returns}
+    \begin{center}
+      \includegraphics[width=5.75in]{lab7cii_citi.png}
+      \includegraphics[width=5.75in]{lab7cii_sp500.png}
+    \end{center}
+
+\newpage
+\section{Codes}
+  \subsection*{1-day VaR}
+  \lstinputlisting{lab7a.R}
+  \subsection*{Bootstrap estimate}
+  \lstinputlisting{lab7b.R}
+  \newpage
+  \subsection*{Log-returns}
+  \lstinputlisting{lab7ci.R}
+
+\end{document}
