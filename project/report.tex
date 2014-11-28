@@ -1,0 +1,203 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.3 (9/9/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside]{article}
+
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+
+\usepackage[linesnumbered]{algorithm2e}
+\usepackage{amsmath}
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{MA 471 $\bullet$ November 2014 $\bullet$ Final} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{SIMULATING TYPE-II CENSORED DATA FOR DISCRIMINATING BETWEEN THE WEIBULL AND LOG-NORMAL DISTRIBUTIONS}} % Article title
+
+\author{
+\large
+\textsc{Sai, Harsha, Gupta, Kamra, Bikash}\thanks{RollNo. 110123-11,18,28,30,38}\\[2mm] % Your name
+\normalsize Indian Institute of Technology Guwahati \\ % Your institution
+%\normalsize \href{mailto:john@smith.com}{john@smith.com} % Your email address
+\vspace{-5mm}
+}
+\date{}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Insert title
+
+\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+
+Log-normal and Weibull distributions are the two most popular distributions for analyzing skewed lifetime data. In this report, we simulate Type-II censored data for verifying results published by Arabin Kr. Dey and D. Kundu.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % Two-column layout throughout the main article text
+
+\section{Introduction}
+
+\lettrine[nindent=0em,lines=3]{I}t is quite difficult to distinguish between data generated from Weibull or Lognormal distributions because the cumulative distribution functions of both types are very close to each other. In the paper \cite{ad09}, the difference between log-likelihood of Weibull and Log-normal is used to decide on which distribution to model the dataset on. The difference has been proved to be asymptotically normally distributed.
+%------------------------------------------------
+\section{The Log-Normal and Weibull Distributions}
+The density function of the Log-Normal distribution and the Weibull distribution is presented below. It is assumed that the density function of a log-normal random variable with scale parameter $\eta >0$ and a shape parameter $\sigma >0$ is 
+\begin{equation}
+f_{LN}(x;\sigma,\eta)=\frac{1}{\sqrt{2\pi x\sigma}}e^{-\frac{1}{2}\{\frac{\ln x-\ln \eta}{\sigma}\}^{2}}
+\end{equation}  
+Similarly, the density function of a Weibull distribution, with shape parameter $\beta>0$ and scale parameter $\theta>0$ is
+\begin{equation}
+f_{WE}(x;\beta,\theta)=\beta\theta^{\beta}x^{(\beta-1)}e^{-(\theta x)^{\beta}}
+\end{equation}
+\section{The Problem}
+The problem of testing whether some given observations follow one of the two probability distributions is quite old. In this project we consider the following problem: Let $X_1,\hdots,X_n$ be a random sample from a log-normal or Weibull distribution and the experimenter observes only the first r of these, namely $X_{(1)}<\hdots<X_{(r)}$. Based on the sample the experimenter wants to decide which of the two mentioned distributions is preferable to model the data.
+
+In \cite{ad09} we use the difference of the maximized log-likelihood functions in discriminating between the two distribution functions. Suppose, $(\hat{\beta},\hat{\theta})$ and $(\hat{\sigma},\hat{\eta})$ are the MLEs of the Weibull parameters $(\beta,\theta)$ and the log-normal parameters $(\sigma,\eta)$ respectively, based on the censored sample $X_{(1)},\hdots,X_{(r)}$. Then we choose Weibull or log-normal as the preferred model if
+\begin{equation}
+T_{n}=L_{WE}(\hat{\beta},\hat{\theta})-L_{LN}(\hat{\sigma},\hat{\eta})
+\end{equation}
+is greater than zero  or less than zero respectively. Here $L_{WE}(.,.)$ and $L_{LN}(.,.)$ denote the log-likelihood functions of the Weibull and log-normal distributions. Without the additive constant they can be written as,
+\begin{equation}
+\begin{split}
+L_{WE}(\beta,\theta)=\sum_{i=1}^{r}\ln f_{WE}(X_{(i)};\beta,\theta) \\
++(n-r)\ln(1-F_{WE}(X_{(r)};\beta,\theta))
+\end{split}
+\end{equation}
+and, for Lognormal distributions,
+\begin{equation}
+\begin{split}
+L_{LN}(\sigma,\eta)=\sum_{i=1}^{r}\ln f_{LN}(X_{(i)};\sigma,\eta)\\
++(n-r)\ln(1-F_{LN}(X_{(r)};\sigma,\eta))
+\end{split}
+\end{equation}
+We can obtain the asmptotic distribution of $T_n$ using the approach of \cite{b85}. It is observed that the asymptotic distributions are normally distributed and they are independent of the unknown parameters. The asymptotic distributions can be used to compute the probability of correct selection (PCS) in selecting the correct model. Also, PCS can be used to discriminate between the two distributions for modeling the data for a given PCS. 
+
+In this project we try to simulate data to verify the above mentioned theory for preset values of $n, r$, and PCS using Monte-Carlo methods. In the following sections we discuss the backgroung for determination of sample size and the algorithms for generating the data.
+\section{Determination of the Sample Size}
+ In this section we discuss a method to determine the minimum sample size needed to discrimante between the two distribution functions for a given user specified probability of correct selection and when the censoring proportion is also known. The asymptotic distributions can also used for testing purposes.
+ Suppose it is assumed that the data are coming from $LN(\sigma,\eta)$ and the censoring proportion is $p$. Since $T_n$ is asymptotically normally dostributed with mean $E_{LN}(T_n)$ and variance $V_{LN}(T_n)$, therefore, $PCS_{LN}=P(T_{n}\leq 0)$. Similarly, if it is assumed that the data are coming from $WE(\beta,\theta)$, then for the censoring proportion $p$, the $PCS$ can be written as $PCS_{WE}=P(T_{n}>0)$. Therefore, for a given $p$, to determine the minimum sample size required to achieved at least $\alpha*$ protection level, we equate
+\begin{equation}
+\phi\left(-\frac{n\times AM_{LN}(p)}{\sqrt{n\times AV_{LN}(p)}}\right)=\alpha*
+\end{equation}
+ and,
+\begin{equation}
+\phi\left(-\frac{n\times AM_{WE}(p)}{\sqrt{n\times AV_{WE}(p)}}\right)=\alpha*
+\end{equation}
+and obtain $n_1$ and $n_2$ from the above two equations as,
+\begin{equation}
+n_1=\frac{z_{\alpha*}^{2}AV_{LN}(p)}{(AM_{LN}(p))^2}
+\end{equation}
+\begin{equation}
+n_1=\frac{z_{\alpha*}^{2}AV_{WE}(p)}{(AM_{WE}(p))^2}
+\end{equation} 
+Here, $z_\alpha$ is the $\alpha$-th percentile point of a standard normal distribution. From this we can take $n=max{n_1,n_2}$ the minimum sample size required to achieve at least $\alpha*$ protection level for a given $p$. The asymptotic values are provided in 
+\section{Algorithm}
+\subsection{Generating data from Weibull}
+\begin{algorithm}[H]
+  \KwData{p, the censoring proportion and n, size of the dataset}
+  \KwResult{$\alpha$, the probability of correct selection}
+  dataset = rweibull(n, 1, 1)\;
+  censoredData = dataset(1:n$\times$ p)\;
+  T = c(T, mleWE(censoredData, n) - mleLN(censoredData, n)\;
+  $\alpha$ = $\{T_i : T_i > 0\}/n\times p$\;
+\end{algorithm}
+
+
+\subsection{Generating data from Log-normal}
+\begin{algorithm}[H]
+  \KwData{p, the censoring proportion and n, size of the dataset}
+  \KwResult{$\alpha$, the probability of correct selection}
+  dataset = rlnormal(n, 1, 1)\;
+  censoredData = dataset(1:n$\times$ p)\;
+  T = c(T, mleWE(censoredData, n) - mleLN(censoredData, n)\;
+  $\alpha$ = $\{T_i : T_i < 0\}/n\times p$\;
+\end{algorithm}
+
+
+%------------------------------------------------
+
+
+
+%------------------------------------------------
+
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\bibitem{ad09}[Arabin Kr. Dey and Debasis Kundu, 2009]{}
+ IEEE Transactions on Reliability , vol. 58, no. 3, 416-424, 2009. 
+\newblock  " Discriminating among the log-normal, Weibull and generalized exponential distributions"
+\bibitem{b85}[Bhattacharyya,G.K., 1985]{}
+ Journal of American Statistical Association , vol. 80, 398-404, 1985. 
+\newblock  " The Asymptotic of Maximum Likelihood and Related Estimators Based on Type-II Censored Data"
+ 
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+
+\end{document}
