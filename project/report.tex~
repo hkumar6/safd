@@ -24,6 +24,7 @@
 
 \usepackage[linesnumbered]{algorithm2e}
 \usepackage{amsmath}
+\usepackage{listings}
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \linespread{1.05} % Line spacing - Palatino needs more space between lines
@@ -149,7 +150,7 @@ n_1=\frac{z_{\alpha*}^{2}AV_{LN}(p)}{(AM_{LN}(p))^2}
 \begin{equation}
 n_1=\frac{z_{\alpha*}^{2}AV_{WE}(p)}{(AM_{WE}(p))^2}
 \end{equation} 
-Here, $z_\alpha$ is the $\alpha$-th percentile point of a standard normal distribution. From this we can take $n=max{n_1,n_2}$ the minimum sample size required to achi
+Here, $z_\alpha$ is the $\alpha$-th percentile point of a standard normal distribution. From this we can take $n=max{n_1,n_2}$ the minimum sample size required to achieve at least $\alpha*$ protection level for a given $p$. The asymptotic values for $AM_{LN}(p)$,$AV_{LN}(p)$,$AM_{WE}(p)$,$AV_{WE}(p)$ are provided in \cite{ad09} along with there derivations. In the next section we mention the algorithm used in generating the data. 
 \section{Algorithm}
 \subsection{Generating data from Weibull}
 \begin{algorithm}[H]
@@ -172,7 +173,16 @@ Here, $z_\alpha$ is the $\alpha$-th percentile point of a standard normal distri
   $\alpha$ = $\{T_i : T_i < 0\}/n\times p$\;
 \end{algorithm}
 
+\section{Implementaion using R}
+\subsection{Driver Function}
+\lstinputlisting[language=R, breaklines=TRUE]{generateDataWe.R}
+\subsection{MLE for Weibull}
+\lstinputlisting[language=R, breaklines=TRUE]{mlewe.R}
+\subsection{MLE for Lognormal}
+\lstinputlisting[language=R, breaklines=TRUE]{mleln.R}
 
+\section*{Conclusion}
+We have faced numerous issues while generating the correct data set. With some careful observation we were able to resolve a few. Noteable among them are
 %------------------------------------------------
 
 
