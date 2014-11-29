@@ -1,13 +1,11 @@
+library(MASS)
+
 mleweibull <- function(x, L) {
-  beta <- 0.5
-  theta <- 0.5
-  n <- length(x)
-  eps <- 10^-6
-  while (abs(ldiffbeta(x, beta, theta))>eps & abs(ldifftheta(x, beta, theta))>eps) {
-    theta <- (n/sum(x^beta))^(1/beta)
-    beta <- -n/(n*log(theta) + sum(log(x)) - sum((theta*x)^beta * log(theta*x)))
-  }
-  mw <- sum(dweibull(x, shape = beta, scale = 1/theta)) + (L-n)*log(1 - pweibull(x[length(x)], shape = beta, scale = 1/theta))
+  f <- fitdistr(x, densfun="weibull")
+  t <- unlist(f, use.names = FALSE)
+  beta <- t[1]
+  theta <- t[2]
+  mw <- sum(log(dweibull(x, shape = beta, scale = theta))) + (L-length(x))*log(1 - pweibull(x[length(x)], shape = beta, scale = theta))
   return(mw)
 }
 
