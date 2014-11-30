@@ -16,10 +16,7 @@ for(iter_n in 1:length(n)) {
     pcsW[iter_p, iter_n] <- (n_sim + pcsW[iter_p, iter_n])/(2*n_sim)
   }
 }
-<<<<<<< HEAD
 
 colnames(o) <- n
 rownames(o) <- p
-pcs <- as.table(pcs)
-=======
->>>>>>> 74767c3642ac7b07a41da0622421f396e3754c76
+
