@@ -12,10 +12,6 @@ for(iter_n in 1:length(n)) {
       censored <- dataset[1:n[iter_n]*p[iter_p]]
       pcsL[iter_p, iter_n] <- pcsL[iter_p, iter_n] + sign( mleweibull(censored, n[iter_n]) - mlelnormal(censored, n[iter_n]))
     }
-    pcsL[iter_p, iter_n] <- 1 - (n_sim + pcs[iter_p, iter_n])/(2*n_sim)
+    pcsL[iter_p, iter_n] <- 1 - (n_sim + pcsL[iter_p, iter_n])/(2*n_sim)
   }
 }
-
-colnames(o) <- n
-rownames(o) <- p
-pcs <- as.table(pcs)
